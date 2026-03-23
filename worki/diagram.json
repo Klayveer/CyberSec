@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "author": "Equipe CyberSec",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "wokwi-esp32-devkit-v1",
+      "id": "esp",
+      "top": 0,
+      "left": -200,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-ili9341",
+      "id": "tft",
+      "top": -364,
+      "left": 431.7,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_nfc",
+      "top": 303.8,
+      "left": -19.2,
+      "attrs": { "color": "red", "label": "NFC" }
+    },
+    {
+      "type": "wokwi-analog-joystick",
+      "id": "joy",
+      "top": -288.6,
+      "left": 139.8,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz",
+      "top": -112.8,
+      "left": 30.6,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-rgb-led",
+      "id": "led",
+      "top": -150,
+      "left": -50,
+      "attrs": { "common": "cathode" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_a",
+      "top": 447.8,
+      "left": 307.2,
+      "attrs": { "color": "green", "label": "A" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_b",
+      "top": 342.2,
+      "left": 422.4,
+      "attrs": { "color": "blue", "label": "B" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_x",
+      "top": 284.6,
+      "left": 211.2,
+      "attrs": { "color": "yellow", "label": "X" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn_y",
+      "top": 236.6,
+      "left": 336,
+      "attrs": { "color": "black", "label": "Y" }
+    }
+  ],
+  "connections": [
+    ["esp:GND.1", "tft:GND", "black", []],
+    ["esp:3V3", "tft:VCC", "red", []],
+    ["esp:3V3", "tft:LED", "red", []],
+    ["esp:D15", "tft:CS", "orange", []],
+    ["esp:D4", "tft:RST", "white", []],
+    ["esp:D2", "tft:D/C", "green", []],
+    ["esp:D23", "tft:MOSI", "blue", []],
+    ["esp:D18", "tft:SCK", "yellow", []],
+    ["esp:D19", "tft:MISO", "cyan", []],
+    ["esp:GND.1", "btn_nfc:1.l", "black", []],
+    ["esp:D5", "btn_nfc:2.l", "green", ["h41.1", "v244.5"]],
+    ["esp:GND.2", "joy:GND", "black", []],
+    ["esp:3V3", "joy:VCC", "red", []],
+    ["esp:D34", "joy:VERT", "purple", []],
+    ["esp:D35", "joy:HORZ", "cyan", []],
+    ["esp:GND.2", "bz:1", "black", []],
+    ["esp:D13", "bz:2", "red", []],
+    ["esp:GND.2", "led:COM", "black", []],
+    ["esp:D25", "led:R", "red", []],
+    ["esp:D26", "led:G", "green", []],
+    ["esp:D27", "led:B", "blue", []],
+    ["esp:GND.1", "btn_a:1.l", "black", []],
+    ["esp:D32", "btn_a:2.l", "green", ["h483", "v407.6"]],
+    ["esp:GND.1", "btn_b:1.l", "black", []],
+    ["esp:D33", "btn_b:2.l", "blue", ["h607.8", "v292.5"]],
+    ["esp:GND.1", "btn_x:1.l", "black", []],
+    ["esp:D21", "btn_x:2.l", "yellow", ["h290.7", "v253.7"]],
+    ["esp:GND.1", "btn_y:1.l", "black", []],
+    ["esp:D22", "btn_y:2.l", "orange", ["h425.1", "v234.6"]]
+  ],
+  "dependencies": {}
+}
