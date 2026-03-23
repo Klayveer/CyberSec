@@ -1,121 +1,151 @@
 # 🛡️ CyberSec: Network Defender (Projeto Deadlock)
 
-**Console Embarcado Interativo para Simulação de Defesa Cibernética.** Projeto Integrador de Eletrônica Aplicada e Sistemas Embarcados.
+Console embarcado interativo para simulação de defesa cibernética.
+Projeto integrador de Eletrônica Aplicada e Sistemas Embarcados.
 
 ## 📖 Sobre o Projeto
 
-O **CyberSec: Network Defender** é um simulador de sobrevivência gamificado em formato de console portátil (Edutainment). O jogador assume o papel de um analista de TI durante um expediente crítico (08h às 18h). O objetivo é defender a infraestrutura de rede da empresa contra ataques hackers reais (Ransomware, DDoS, Espionagem) utilizando uma mecânica **"Phygital"** (Físico + Digital).
+O CyberSec: Network Defender é um simulador de sobrevivência em formato de console portátil (edutainment).
+O jogador assume o papel de um analista de TI durante um expediente crítico (08h às 18h), defendendo a rede da empresa contra ataques reais, como ransomware, DDoS e espionagem.
 
-Em vez de menus abstratos na tela, o jogador utiliza um deck físico de **20 cartões NFC** para aplicar contramedidas de cibersegurança.
+A proposta usa uma mecânica phygital (físico + digital): em vez de menus abstratos, o jogador usa um deck físico de 20 cartões NFC para aplicar contramedidas.
 
-## 🎮 Mecânicas Principais (Core Loop)
+## 🎮 Mecânicas Principais
 
-- **Mapa 2D Top-Down:** A rede é representada pela planta física da empresa (Sala de Servidores, RH, Financeiro).
-- **Ação Local:** Para mitigar um ataque, o jogador deve movimentar o personagem fisicamente até a sala afetada através do Joystick.
-- **Leitura NFC (Cyber-Deck):** Ao chegar no terminal sob ataque, o jogador deve escanear a carta física correta (ex: Carta de "Backup de Emergência" para conter um Ransomware).
-- **Action Lock & Penalidades:** Ações corretas consomem tempo de processamento. Cartões incorretos agravam o ataque do hacker e aceleram a queda do setor.
-- **Sistema de Vidas:** A perda de um setor compromete a integridade da empresa. A perda total resulta em "Demissão por Justa Causa" (Game Over).
+- **Mapa 2D Top-Down:** a rede é representada pela planta física da empresa (servidores, RH, financeiro etc.).
+- **Ação local:** para mitigar ataques, o personagem deve ir até o setor afetado via joystick.
+- **Leitura NFC (Cyber-Deck):** no terminal sob ataque, o jogador escaneia a carta correta.
+- **Action lock e penalidades:** ações corretas consomem tempo; cartas erradas agravam o ataque.
+- **Sistema de vidas:** perda de setores compromete a empresa e pode levar ao game over.
 
 ## 🛠️ Arquitetura de Hardware
 
-O console foi projetado com foco em performance gráfica e tempo de resposta:
-
-- **Microcontrolador:** ESP32-S3 DevKitC-1.
-- **Memória de Massa:** NAND Flash W25N01G (128MB) via SPI para armazenamento de assets (sprites/áudios) sem sobrecarregar a RAM.
-- **Display:** Tela TFT SPI 3.5" (com biblioteca gráfica LVGL).
-- **Leitor NFC:** Módulo PN532.
-- **Controles:** Joystick Analógico e 4 Push-buttons.
-- **Feedback:** Buzzer Passivo e LED RGB.
-- **Energia:** Bateria Li-Po com Módulo TP4056 e Regulador LDO.
+- **Microcontrolador:** ESP32-S3 DevKitC-1
+- **Memória de massa:** NAND Flash W25N01G (128MB) via SPI
+- **Display:** TFT SPI 3.5" (LVGL)
+- **Leitor NFC:** PN532
+- **Controles:** joystick analógico + 4 push-buttons
+- **Feedback:** buzzer passivo + LED RGB
+- **Energia:** bateria Li-Po + TP4056 + regulador LDO
 
 ## ⚡ Fundamentação em Eletrônica Analógica
 
-O hardware físico foi desenvolvido aplicando os conceitos rigorosos da disciplina:
+1. **Entradas analógicas (ADC):** leitura dos eixos X/Y do joystick para movimentação fluida.
+2. **Chaveamento com transistor NPN:** acionamento do buzzer nas regiões de corte/saturação.
+3. **Debounce em hardware (filtro RC):** redução de ruído mecânico nos botões.
+4. **Lei de Ohm:** dimensionamento de resistores para LEDs de status.
 
-1. **Entradas Analógicas (ADC):** Leitura dos eixos X/Y do Joystick via divisores de tensão internos para movimentação fluida no mapa.
-2. **Dispositivos de Chaveamento:** Transistor NPN operando nas regiões de corte e saturação para amplificar a corrente e acionar o Buzzer Passivo.
-3. **Hardware Debounce (Filtro RC):** Implementação de capacitores e resistores criando um filtro passa-baixa nos botões de ação, garantindo um sinal digital sem repique (ruído mecânico).
-4. **Lei de Ohm:** Dimensionamento preciso de resistores limitadores de corrente para os LEDs de status do sistema.
+## 🚀 Como Começar
 
-## � Como Começar
+### Pré-requisitos
 
-### Clonar o Repositório
+- Git
+- Node.js + npm
+
+### Clonar o repositório
 
 ```bash
 git clone https://github.com/Klayveer/CyberSec.git
 cd CyberSec
 ```
 
-### Instalar Dependências
+### Instalar dependências
 
 ```bash
 npm install
 ```
 
-## 📋 Contribuição & Commits
+## 🧪 Simulador V1 (Wokwi)
 
-Este projeto utiliza **Conventional Commits** para manter um histórico claro e organizado. Todos os commits devem seguir o padrão abaixo:
+A versão inicial do simulador está na pasta `worki/`.
 
-### Formato de Commit
+- Link do projeto no Wokwi: https://wokwi.com/projects/459240224531439617
+- Sketch principal: `worki/sketch.ino`
+- Bibliotecas usadas no simulador:
+  - Adafruit ILI9341
+  - Adafruit GFX Library
 
-```
+### Como abrir a V1
+
+1. Acesse o link do Wokwi acima.
+2. Use os arquivos da pasta `worki/` como referência da montagem e lógica.
+3. Rode a simulação para validar fluxo de menu, mapa, alerta e resposta NFC.
+
+## 📋 Padrão de Commits (Commitlint)
+
+Este projeto usa **Conventional Commits** com validação automática via hooks.
+
+Formato esperado:
+
+```text
 <type>(<scope>): <subject>
 ```
 
-### Tipos Permitidos
+`scope` é opcional.
 
-- **feat**: Uma nova funcionalidade
-- **fix**: Correção de bug
-- **docs**: Alterações na documentação
-- **style**: Formatação de código (sem mudança de lógica)
-- **refactor**: Reorganização de código
-- **perf**: Melhorias de performance
-- **test**: Adição ou alteração de testes
-- **chore**: Tarefas de build, dependências, etc.
-- **ci**: Alterações em CI/CD
-- **revert**: Reverter um commit anterior
+### Tipos permitidos
 
-### Exemplos de Commits Válidos
+- feat
+- fix
+- docs
+- style
+- refactor
+- perf
+- test
+- chore
+- ci
+- revert
+
+### Regras ativas
+
+- tipo obrigatório e em minúsculas
+- subject obrigatório
+- subject sem ponto final
+- subject não pode estar em Start Case
+- tamanho máximo do header: 72 caracteres
+
+### Exemplos válidos
 
 ```bash
-git commit -m "feat: adicionar leitor NFC ao console"
-git commit -m "fix: corrigir mapeamento de joystick analógico"
-git commit -m "docs: atualizar documentação do hardware"
-git commit -m "refactor: reorganizar estrutura de pastas do projeto"
-git commit -m "perf: otimizar renderização gráfica da tela"
+git commit -m "feat: adicionar leitor nfc ao console"
+git commit -m "fix: corrigir leitura do joystick"
+git commit -m "docs: atualizar visão geral do hardware"
+git commit -m "chore(ci): ajustar pipeline de validação"
 ```
 
-### Regras Importantes
+## ✅ Qualidade de Código (Husky + Lint-Staged)
 
-- ⚠️ Mensagens de commit **NÃO** podem terminar com ponto final
-- ⚠️ Use sempre **minúsculas** no tipo e escopo
-- ⚠️ Máximo de **72 caracteres** no subject
-- ⚠️ Commits são validados automaticamente pelo `commitlint` + `husky`
+Antes de cada commit:
 
-### Ferramentas de Desenvolvimento
+- **pre-commit:** roda `lint-staged`
+  - `eslint --fix` em arquivos `*.js, *.jsx, *.ts, *.tsx`
+  - `prettier --write` em `*.js, *.jsx, *.ts, *.tsx, *.json, *.css, *.md`
+- **commit-msg:** roda `commitlint` para validar a mensagem
 
-Este projeto utiliza as seguintes ferramentas para manter a qualidade do código:
-
-- **husky**: Gerencia Git hooks
-- **commitlint**: Valida as mensagens de commit
-- **lint-staged**: Executa linters automaticamente nos arquivos alterados
-
-Essas ferramentas rodam **automaticamente** antes de cada commit, garantindo que apenas código de qualidade seja integrado.
+Isso garante padrão de histórico e formatação consistente no repositório.
 
 ## 📁 Estrutura do Projeto
 
-```
+```text
 CyberSec/
-├── src/              # Código-fonte principal
-├── hardware/         # Documentação e esquemáticos do hardware
-├── docs/             # Documentação do projeto
-├── assets/           # Imagens, sprites e recursos
-├── package.json      # Dependências do projeto
-├── commitlint.config.js  # Configuração do commitlint
-└── README.md         # Este arquivo
+├── assets/         # Imagens, sprites e recursos
+├── docs/           # Documentação do projeto
+├── hardware/       # Documentação e esquemáticos do hardware
+├── src/            # Código-fonte principal
+├── worki/          # Simulador V1 (Wokwi)
+│   ├── sketch.ino
+│   ├── diagram.json
+│   ├── libraries.txt
+│   ├── link.txt
+│   ├── circuito.png
+│   └── problema.png
+├── commitlint.config.js
+├── eslint.config.js
+├── package.json
+└── README.md
 ```
 
-## �👥 Equipe de Desenvolvimento
+## 👥 Equipe de Desenvolvimento
 
 - Caio Godoy
 - Iris Costa
@@ -124,4 +154,4 @@ CyberSec/
 
 ---
 
-_Projeto acadêmico desenvolvido durante o semestre letivo._
+Projeto acadêmico desenvolvido durante o semestre letivo.
